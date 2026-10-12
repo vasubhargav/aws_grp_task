@@ -1,0 +1,16 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Virtual environment
+.venv/
+venv/
+
+# Django static files
+staticfiles/
