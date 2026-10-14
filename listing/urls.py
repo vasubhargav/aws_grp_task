@@ -1,7 +1,7 @@
 
 from django.urls import path
 from . import views
-
+from .views import upload_listing_image
 urlpatterns = [
     # Get all properties
     path('properties/', views.get_properties, name='get_properties'),
@@ -20,4 +20,7 @@ urlpatterns = [
 
     # Delete
     path('properties/<int:pk>/delete/', views.delete_property, name='delete_property'),
+
+    #image_upload
+    path('properties/<int:pk>/upload-image/',upload_listing_image, name='upload-listing-image'),
 ]
