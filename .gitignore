@@ -1,0 +1,6 @@
+House_Rent_Dataset.csv
+.env
+__pycache__/
+*.py[cod]
+.venv/
+venv/
