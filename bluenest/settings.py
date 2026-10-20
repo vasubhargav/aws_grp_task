@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'inquiries',
-    'tenancy',
+    'Bookings',
     'listing',
     "phonenumber_field",
     "ml_integration",

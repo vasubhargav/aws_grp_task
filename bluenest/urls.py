@@ -21,4 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
     path('api/listing/', include('listing.urls')),
+    path('api/booking/', include('Bookings.urls')),
+    path("api/ml/", include("ml_integration.urls")),
 ]
+ 
