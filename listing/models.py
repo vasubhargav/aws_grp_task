@@ -43,7 +43,7 @@ class Listing(models.Model):
     is_unusual_price = models.BooleanField(default=False)
     #normal fields by landlord 
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='listing_images/', null=True, blank=True)
+    image = models.URLField(max_length=2500,blank=True,null=True)
 
     class Meta:
         ordering = ['-created_at']

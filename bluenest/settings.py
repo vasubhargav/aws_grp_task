@@ -14,9 +14,9 @@ from pathlib import Path
 from decouple import config
 import os
 import dj_database_url
-import os
 # from pathlib import Path
 from dotenv import load_dotenv
+import cloudinary
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,9 +58,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'inquiries',
-    'tenancy',
+    'Bookings',
     'listing',
-    "phonenumber_field"
+    "phonenumber_field",
+    "ml_integration",
 ]
 
 MIDDLEWARE = [
@@ -95,7 +96,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'bluenest.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
@@ -184,3 +184,12 @@ ORS_ALLOWED_ORIGINS = [
     "https://bluenest-nine.vercel.app",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+# Cloudinary Configuration
+
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True,
+)
