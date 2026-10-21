@@ -6,6 +6,7 @@ from .serializers import ListingSerializer, SavedListingSerializer
 from .models import Listing, SavedListing
 from rest_framework import status
 from .image_upload import upload_property_image
+from rest_framework.permissions import IsAuthenticated
 def get_owned_listing(request, pk):
     try:
         return Listing.objects.get(
