@@ -23,4 +23,7 @@ urlpatterns = [
 
     #image_upload
     path('properties/<int:pk>/upload-image/',upload_listing_image, name='upload-listing-image'),
+
+    path('properties/browse/', views.browse_properties, name='browse_properties'),
+
 ]

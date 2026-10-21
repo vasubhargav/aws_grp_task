@@ -101,3 +101,11 @@ def upload_listing_image(request, pk):
     except Exception:
         logger.exception("Image upload failed for listing %s", pk)
         return Response({"error": "Image upload failed. Check server logs."}, status=status.HTTP_502_BAD_GATEWAY)
+
+# API for tenants to browse all properties
+@api_view(["GET"])
+@permission_classes([IsAuthenticated, landlordOrTenantPermission])
+def browse_properties(request):
+    listings = Listing.objects.all().order_by("-id")
+    serializer = ListingSerializer(listings, many=True, context={"request": request})
+    return Response(serializer.data, status=status.HTTP_200_OK)
