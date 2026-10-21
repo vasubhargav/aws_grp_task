@@ -15,11 +15,16 @@ def get_owned_listing(request, pk):
     except Listing.DoesNotExist:
         return None
 @api_view(['GET'])
-@permission_classes([landlordOrTenantPermission])
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, landlordPermission])
 def get_properties(request):
-    listings = Listing.objects.all()
+    listings = Listing.objects.filter(owner=request.user)
+
     serializer = ListingSerializer(listings, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+
+    return Response(serializer.data,status=status.HTTP_200_OK)
+
 @api_view(['GET'])
 @permission_classes([landlordOrTenantPermission])
 def get_property(request, listing_id):
@@ -64,14 +69,25 @@ def updateproperty(request,pk):
         serializers.save()
         return Response(serializers.data,status = status.HTTP_200_OK)
 @api_view(['DELETE'])
-@permission_classes([AllowAny])
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated, landlordPermission])
 def delete_property(request, pk):
     try:
-        listing = Listing.objects.get(id=pk)
+        listing = Listing.objects.get(
+            id=pk,
+            owner=request.user
+        )
     except Listing.DoesNotExist:
-        return Response({"error": "Listing not found."},status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {"error": "Listing not found or access denied"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
     listing.delete()
+
     return Response(status=status.HTTP_204_NO_CONTENT)
+
 import logging
 
 from rest_framework.decorators import (
